@@ -172,7 +172,7 @@ def ring_distances_reasonable(zma, rng_atoms, dist_value_dct, thresh=0.3):
 
 
 def ring_dihedrals(zma, rng_atoms):
-    """Get ring dihedral names and their angle values
+    """Get N-3 ring dihedral names and their angle values
 
     :param zma: Z-Matrix
     :type zma: automol.zmat object
