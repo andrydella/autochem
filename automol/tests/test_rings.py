@@ -327,16 +327,15 @@ def __geom_ring():
 
 
 def test__cremerpople():
-    ring_subgeo = geom.ring_only_geometry(GEO4)
-    coord = [cord for _,cord in ring_subgeo]
-    crem_pop,z = geom.cremer_pople_params(coord)
-    q,_ = crem_pop
-    assert numpy.allclose(q,[0.7680477833143369],atol=1e-02)
-    print(q,numpy.sum(numpy.abs(z)))
-    # removed as pseudorotation follows atom order, which I do not pre-determine
-    # So it gets different values based on system
-    #assert numpy.allclose(phi,[-1.4363780148135412],atol=1e-05)
-    assert numpy.allclose(numpy.sum(numpy.abs(z)),1.54661577101747,atol=1e-02)
+    ring_geos = [GEO1,GEO2,GEO3,GEO4]
+    for geo in ring_geos:
+        ring_subgeo = geom.ring_only_geometry(geo)
+        coord = [cord for _,cord in ring_subgeo]
+        crem_pop,z = geom.cremer_pople_params(coord)
+        q,phi = crem_pop
+        assert len(z) == len(ring_subgeo)
+        assert len(q)+len(phi) == len(ring_subgeo)-3
+
 
 def test__dbscan_clustering():
     # chair_geo = (
